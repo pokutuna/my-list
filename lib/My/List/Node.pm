@@ -2,6 +2,9 @@ package My::List::Node;
 
 use strict;
 use warnings;
+use base qw(Class::Accessor);
+
+__PACKAGE__->mk_accessors(qw/prev value next/);
 
 sub new {
     my $class = shift;
@@ -13,20 +16,15 @@ sub new {
 
 sub _init {
     my $self = shift;
-    $self->{prev} = undef;
-    $self->{value} = undef;
-    $self->{next} = undef;
-}
-
-sub value {
-    my $self = shift;
-    return $self->{value};
+    $self->prev(undef);
+    $self->value(undef);
+    $self->next(undef);
 }
 
 sub remove{
     my $self = shift;
-    $self->{prev}->{next} = $self->{next};
-    $self->{next}->{prev} = $self->{prev};
+    $self->prev->next($self->next);
+    $self->next->prev($self->prev);
 }
 
 1;
