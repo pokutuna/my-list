@@ -34,6 +34,34 @@ sub append {
     $self->tail($node);
 }
 
+sub size {
+    my $self = shift;
+    my $itr = $self->iterator;
+    my $count = 0;
+    while ($itr->has_next) {
+        $count += 1;
+        $itr->next;
+    }
+    return $count;
+}
+
+sub node_at {
+    my ($self, $index) = @_;
+    return undef if !defined($index) || $index < 0;
+    my $itr = $self->iterator;
+    while ($itr->has_next) {
+        my $node = $itr->next;
+        return $node if $index == 0;
+        $index -= 1;
+    }
+    return undef;
+}
+
+sub clear {
+    my $self = shift;
+    $self->_init;
+}
+
 sub iterator {
     my $self = shift;
     my $itr = My::List::Iterator->new($self->root);
