@@ -1,1 +1,7 @@
 はてなインターン課題 連結リスト My::List
+
+方向連結リストにしてみた
+Node::removeで前後のNodeを繋ぐ
+List::sizeでリストの要素数
+List::node_atでn番目の要素を返す
+List::clearでリストを空にする
